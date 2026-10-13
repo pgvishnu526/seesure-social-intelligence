@@ -1,5 +1,5 @@
 """
-SocialPulse Backend - Main FastAPI Application
+SeeSure Backend - Main FastAPI Application
 """
 
 import os
@@ -41,8 +41,8 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app
 app = FastAPI(
-    title="SocialPulse API",
-    description="AI-Powered Social Media Intelligence & Content Verification Platform",
+    title="SeeSure API",
+    description="AI-Powered Social Media Content Verification & Risk Assessment Platform",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -89,7 +89,7 @@ async def startup_event():
     """Log startup information"""
     demo_mode = os.getenv("DEMO_MODE", "false").lower() == "true"
     
-    logger.info(f"SocialPulse API started")
+    logger.info(f"SeeSure API started")
     logger.info(f"Demo mode: {demo_mode}")
     
     # Check required environment variables
