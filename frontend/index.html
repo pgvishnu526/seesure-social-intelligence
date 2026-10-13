@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialPulse - AI-Powered Social Media Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>SocialPulse</h1>
+                <p>AI-Powered Social Media Intelligence & Content Verification</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section id="upload-section" class="upload-section">
+                <div class="upload-container">
+                    <div id="drop-zone" class="drop-zone">
+                        <div class="drop-zone-content">
+                            <div class="upload-icon">📋</div>
+                            <h3>Upload Social Media Screenshot</h3>
+                            <p>Drag and drop an image here or click to select</p>
+                            <p class="file-info">Supports PNG, JPG, JPEG, WEBP • Max 10MB</p>
+                            <input type="file" id="image-input" accept=".png,.jpg,.jpeg,.webp" hidden>
+                            <button id="select-button" class="btn btn-primary">Select Image</button>
+                        </div>
+                    </div>
+                    
+                    <div id="image-preview" class="image-preview" style="display: none;">
+                        <img id="preview-img" src="" alt="Preview">
+                        <div class="preview-actions">
+                            <button id="analyze-button" class="btn btn-success">Analyze Content</button>
+                            <button id="clear-button" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Section -->
+            <section id="processing-section" class="processing-section" style="display: none;">
+                <div class="processing-container">
+                    <div class="processing-header">
+                        <h3>Analysis in Progress</h3>
+                        <div class="analysis-id">Analysis ID: <span id="analysis-id"></span></div>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    
+                    <div class="status-steps">
+                        <div class="step" data-status="received">
+                            <div class="step-icon">📥</div>
+                            <div class="step-text">Received</div>
+                        </div>
+                        <div class="step" data-status="validating">
+                            <div class="step-icon">✅</div>
+                            <div class="step-text">Validating</div>
+                        </div>
+                        <div class="step" data-status="uploaded">
+                            <div class="step-icon">☁️</div>
+                            <div class="step-text">Uploaded</div>
+                        </div>
+                        <div class="step" data-status="extracting">
+                            <div class="step-icon">👁️</div>
+                            <div class="step-text">Extracting</div>
+                        </div>
+                        <div class="step" data-status="analyzing">
+                            <div class="step-icon">🧠</div>
+                            <div class="step-text">Analyzing</div>
+                        </div>
+                        <div class="step" data-status="researching">
+                            <div class="step-icon">🔍</div>
+                            <div class="step-text">Researching</div>
+                        </div>
+                        <div class="step" data-status="verifying">
+                            <div class="step-icon">⚖️</div>
+                            <div class="step-text">Verifying</div>
+                        </div>
+                        <div class="step" data-status="generating_report">
+                            <div class="step-icon">📊</div>
+                            <div class="step-text">Generating Report</div>
+                        </div>
+                        <div class="step" data-status="completed">
+                            <div class="step-icon">✨</div>
+                            <div class="step-text">Completed</div>
+                        </div>
+                    </div>
+                    
+                    <div id="current-status" class="current-status">
+                        Initializing analysis...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Section -->
+            <section id="report-section" class="report-section" style="display: none;">
+                <div class="report-container">
+                    <div class="report-header">
+                        <h2>SocialPulse Intelligence Report</h2>
+                        <div class="report-meta">
+                            <span class="analysis-id">Analysis ID: <span id="report-analysis-id"></span></span>
+                            <span class="timestamp" id="report-timestamp"></span>
+                        </div>
+                        <button id="new-analysis-button" class="btn btn-primary">New Analysis</button>
+                    </div>
+
+                    <div class="report-grid">
+                        <!-- Content Card -->
+                        <div class="report-card">
+                            <h3>Content Analysis</h3>
+                            <div class="content-preview">
+                                <img id="report-image" src="" alt="Analyzed content">
+                            </div>
+                            <div class="content-details">
+                                <div class="detail-item">
+                                    <strong>Extracted Text:</strong>
+                                    <div id="extracted-text" class="text-content"></div>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Content Type:</strong>
+                                    <span id="content-type"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Category:</strong>
+                                    <span id="content-category"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Claim Card -->
+                        <div class="report-card">
+                            <h3>Extracted Claims</h3>
+                            <div class="claim-content">
+                                <div class="main-claim">
+                                    <strong>Main Claim:</strong>
+                                    <div id="main-claim" class="claim-text"></div>
+                                </div>
+                                <div class="claim-details">
+                                    <div class="detail-item">
+                                        <strong>Claim Type:</strong>
+                                        <span id="claim-type"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <strong>Entities:</strong>
+                                        <div id="claim-entities" class="entities"></div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <strong>Values:</strong>
+                                        <div id="claim-values" class="values"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sentiment Card -->
+                        <div class="report-card">
+                            <h3>Sentiment Analysis</h3>
+                            <div class="sentiment-content">
+                                <div class="sentiment-result">
+                                    <div id="sentiment-label" class="sentiment-label"></div>
+                                    <div class="confidence-bar">
+                                        <div id="confidence-fill" class="confidence-fill"></div>
+                                    </div>
+                                    <div class="confidence-text">
+                                        Confidence: <span id="sentiment-confidence"></span>%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Media Analysis Card -->
+                        <div class="report-card">
+                            <h3>Media Analysis</h3>
+                            <div id="media-analysis-content" class="media-analysis-content"></div>
+                        </div>
+
+                        <!-- Research Card -->
+                        <div class="report-card research-card">
+                            <h3>Research Summary</h3>
+                            <div class="research-content">
+                                <div class="research-stats">
+                                    <div class="stat">
+                                        <div class="stat-value" id="sources-count">0</div>
+                                        <div class="stat-label">Sources</div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="stat-value" id="supporting-count">0</div>
+                                        <div class="stat-label">Supporting</div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="stat-value" id="contradicting-count">0</div>
+                                        <div class="stat-label">Contradicting</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="evidence-sections">
+                                    <div class="evidence-section">
+                                        <h4>Supporting Evidence</h4>
+                                        <div id="supporting-evidence" class="evidence-list"></div>
+                                    </div>
+                                    
+                                    <div class="evidence-section">
+                                        <h4>Contradicting Evidence</h4>
+                                        <div id="contradicting-evidence" class="evidence-list"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk Assessment Card -->
+                        <div class="report-card risk-card">
+                            <h3>Risk Assessment</h3>
+                            <div class="risk-content">
+                                <div class="risk-score-container">
+                                    <div class="risk-score">
+                                        <div id="risk-score" class="score-value">0</div>
+                                        <div class="score-max">/ 100</div>
+                                    </div>
+                                    <div id="risk-level" class="risk-level"></div>
+                                </div>
+                                
+                                <div class="risk-reasons">
+                                    <h4>Risk Factors</h4>
+                                    <ul id="risk-reasons-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Summary Card -->
+                        <div class="report-card summary-card">
+                            <h3>AI Summary & Recommendations</h3>
+                            <div class="summary-content">
+                                <div class="ai-summary">
+                                    <h4>Summary</h4>
+                                    <div id="ai-summary" class="summary-text"></div>
+                                </div>
+                                
+                                <div class="recommended-action">
+                                    <h4>Recommended Action</h4>
+                                    <div id="recommended-action" class="action-text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sources Card -->
+                        <div class="report-card sources-card">
+                            <h3>Sources</h3>
+                            <div id="sources-list" class="sources-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="error-section" class="error-section" style="display: none;">
+                <div class="error-container">
+                    <div class="error-icon">⚠️</div>
+                    <h3>Analysis Failed</h3>
+                    <div id="error-message" class="error-message"></div>
+                    <button id="retry-button" class="btn btn-primary">Try Again</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
